@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1009587934655",
+    "project_id": "patients-19403",
+    "storage_bucket": "patients-19403.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1009587934655:android:edef0d647c81fb1abafd0a",
+        "android_client_info": {
+          "package_name": "com.flutterflow.patients"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1009587934655-cfv85gohb6nvid0tvbol2t3icdv099qv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCl3fT84ZT5MpitqAQcmzVAyuojwqOMxYQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1009587934655-cfv85gohb6nvid0tvbol2t3icdv099qv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1009587934655-oue247jetmmhvfh4jd8njat9ah5c1o9s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutterflow.patients"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
