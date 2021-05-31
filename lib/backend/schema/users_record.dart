@@ -12,34 +12,32 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
   static Serializer<UsersRecord> get serializer => _$usersRecordSerializer;
 
   @nullable
-  @BuiltValueField(wireName: 'user_email')
-  String get userEmail;
+  String get email;
 
   @nullable
-  @BuiltValueField(wireName: 'user_username')
-  String get userUsername;
+  @BuiltValueField(wireName: 'display_name')
+  String get displayName;
 
   @nullable
-  @BuiltValueField(wireName: 'user_photo')
-  String get userPhoto;
+  @BuiltValueField(wireName: 'photo_url')
+  String get photoUrl;
 
   @nullable
-  @BuiltValueField(wireName: 'user_ID')
-  String get userID;
+  String get uid;
 
   @nullable
-  @BuiltValueField(wireName: 'user_createdat')
-  Timestamp get userCreatedat;
+  @BuiltValueField(wireName: 'created_time')
+  Timestamp get createdTime;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(UsersRecordBuilder builder) => builder
-    ..userEmail = ''
-    ..userUsername = ''
-    ..userPhoto = ''
-    ..userID = '';
+    ..email = ''
+    ..displayName = ''
+    ..photoUrl = ''
+    ..uid = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('users');
@@ -54,28 +52,28 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
 }
 
 Map<String, dynamic> createUsersRecordData({
-  String userEmail,
-  String userUsername,
-  String userPhoto,
-  String userID,
-  Timestamp userCreatedat,
+  String email,
+  String displayName,
+  String photoUrl,
+  String uid,
+  Timestamp createdTime,
 }) =>
     serializers.serializeWith(
         UsersRecord.serializer,
         UsersRecord((u) => u
-          ..userEmail = userEmail
-          ..userUsername = userUsername
-          ..userPhoto = userPhoto
-          ..userID = userID
-          ..userCreatedat = userCreatedat));
+          ..email = email
+          ..displayName = displayName
+          ..photoUrl = photoUrl
+          ..uid = uid
+          ..createdTime = createdTime));
 
 UsersRecord get dummyUsersRecord {
   final builder = UsersRecordBuilder()
-    ..userEmail = dummyString
-    ..userUsername = dummyString
-    ..userPhoto = dummyImagePath
-    ..userID = dummyString
-    ..userCreatedat = dummyTimestamp;
+    ..email = dummyString
+    ..displayName = dummyString
+    ..photoUrl = dummyImagePath
+    ..uid = dummyString
+    ..createdTime = dummyTimestamp;
   return builder.build();
 }
 
