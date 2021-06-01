@@ -16,6 +16,13 @@ class _ViewPatientWidgetState extends State<ViewPatientWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      appBar: AppBar(
+        backgroundColor: FlutterFlowTheme.primaryColor,
+        automaticallyImplyLeading: true,
+        actions: [],
+        centerTitle: true,
+        elevation: 4,
+      ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [

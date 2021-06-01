@@ -5,15 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class NeurologyPatientsWidget extends StatefulWidget {
-  NeurologyPatientsWidget({Key key}) : super(key: key);
+class AmbulantPatientsWidget extends StatefulWidget {
+  AmbulantPatientsWidget({Key key}) : super(key: key);
 
   @override
-  _NeurologyPatientsWidgetState createState() =>
-      _NeurologyPatientsWidgetState();
+  _AmbulantPatientsWidgetState createState() => _AmbulantPatientsWidgetState();
 }
 
-class _NeurologyPatientsWidgetState extends State<NeurologyPatientsWidget> {
+class _AmbulantPatientsWidgetState extends State<AmbulantPatientsWidget> {
   TextEditingController textController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -27,6 +26,7 @@ class _NeurologyPatientsWidgetState extends State<NeurologyPatientsWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: Color(0xFFF1F4F8),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await Navigator.push(
@@ -84,7 +84,7 @@ class _NeurologyPatientsWidgetState extends State<NeurologyPatientsWidget> {
                   Align(
                     alignment: Alignment(0, 0),
                     child: Text(
-                      'U13 - Neurologie',
+                      'Ambulant',
                       style: FlutterFlowTheme.title1.override(
                         fontFamily: 'Playfair Display',
                         fontSize: 30,

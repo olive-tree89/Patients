@@ -1,4 +1,5 @@
 import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
@@ -58,10 +59,10 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget> {
                                 controller: emailTextController,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  hintText: 'Username',
+                                  hintText: 'Email address',
                                   hintStyle: FlutterFlowTheme.title2.override(
                                     fontFamily: 'Playfair Display',
-                                    color: Colors.white,
+                                    color: Color(0xCB000000),
                                   ),
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
@@ -86,7 +87,7 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget> {
                                 ),
                                 style: FlutterFlowTheme.title2.override(
                                   fontFamily: 'Playfair Display',
-                                  color: Colors.white,
+                                  color: Color(0xCB000000),
                                 ),
                               ),
                             ),
@@ -118,7 +119,7 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget> {
                                   hintText: 'Password',
                                   hintStyle: FlutterFlowTheme.title2.override(
                                     fontFamily: 'Playfair Display',
-                                    color: Colors.white,
+                                    color: Color(0xCB000000),
                                   ),
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
@@ -143,7 +144,7 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget> {
                                 ),
                                 style: FlutterFlowTheme.title2.override(
                                   fontFamily: 'Playfair Display',
-                                  color: Colors.white,
+                                  color: Color(0xCB000000),
                                 ),
                               ),
                             ),
@@ -176,11 +177,23 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget> {
                                 return;
                               }
 
+                              final email = '';
+                              final uid = '';
+
+                              final usersRecordData = createUsersRecordData(
+                                email: email,
+                                uid: uid,
+                              );
+
+                              await UsersRecord.collection
+                                  .doc(user.uid)
+                                  .update(usersRecordData);
+
                               await Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => NavBarPage(
-                                      initialPage: 'PoliclinicPatients'),
+                                      initialPage: 'AmbulantPatients'),
                                 ),
                                 (r) => false,
                               );
@@ -192,7 +205,7 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget> {
                               color: Color(0x00FFFFFF),
                               textStyle: FlutterFlowTheme.subtitle1.override(
                                 fontFamily: 'Lato',
-                                color: Colors.white,
+                                color: Color(0xCB000000),
                               ),
                               borderSide: BorderSide(
                                 color: FlutterFlowTheme.secondaryColor,
@@ -218,7 +231,7 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => NavBarPage(
-                                        initialPage: 'PoliclinicPatients'),
+                                        initialPage: 'AmbulantPatients'),
                                   ),
                                   (r) => false,
                                 );
@@ -230,7 +243,7 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget> {
                                 color: Color(0x00FFFFFF),
                                 textStyle: FlutterFlowTheme.subtitle1.override(
                                   fontFamily: 'Lato',
-                                  color: Colors.white,
+                                  color: Color(0xCB000000),
                                 ),
                                 borderSide: BorderSide(
                                   color: FlutterFlowTheme.secondaryColor,
@@ -247,7 +260,7 @@ class _AuthenticationPageWidgetState extends State<AuthenticationPageWidget> {
                       'Forgot Password?',
                       style: FlutterFlowTheme.subtitle2.override(
                         fontFamily: 'Lato',
-                        color: FlutterFlowTheme.tertiaryColor,
+                        color: Color(0xCB000000),
                       ),
                     )
                   ],

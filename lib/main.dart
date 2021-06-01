@@ -2,8 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'auth/firebase_user_provider.dart';
 import 'package:patients/authentication_page/authentication_page_widget.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
-import 'policlinic_patients/policlinic_patients_widget.dart';
+import 'ambulant_patients/ambulant_patients_widget.dart';
 import 'neurology_patients/neurology_patients_widget.dart';
 import 'stroke_patients/stroke_patients_widget.dart';
 
@@ -59,7 +60,7 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPage = 'PoliclinicPatients';
+  String _currentPage = 'AmbulantPatients';
 
   @override
   void initState() {
@@ -70,7 +71,7 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'PoliclinicPatients': PoliclinicPatientsWidget(),
+      'AmbulantPatients': AmbulantPatientsWidget(),
       'NeurologyPatients': NeurologyPatientsWidget(),
       'StrokePatients': StrokePatientsWidget(),
     };
@@ -79,22 +80,22 @@ class _NavBarPageState extends State<NavBarPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.airport_shuttle,
+            icon: FaIcon(
+              FontAwesomeIcons.walking,
               size: 24,
             ),
-            label: 'Urgences',
+            label: 'Ambulant',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.folder_shared_sharp,
+            icon: FaIcon(
+              FontAwesomeIcons.hospitalUser,
               size: 24,
             ),
             label: 'U13',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.folder_shared,
+            icon: FaIcon(
+              FontAwesomeIcons.procedures,
               size: 25,
             ),
             label: 'U15',
