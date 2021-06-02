@@ -46,7 +46,7 @@ class _AmbulantPatientsWidgetState extends State<AmbulantPatientsWidget> {
       ),
       body: Container(
         width: double.infinity,
-        height: MediaQuery.of(context).size.height * 0.15,
+        height: MediaQuery.of(context).size.height * 0.2,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.primaryColor,
           border: Border.all(
@@ -61,28 +61,31 @@ class _AmbulantPatientsWidgetState extends State<AmbulantPatientsWidget> {
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
-                    child: InkWell(
-                      onTap: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => UserWidget(),
-                          ),
-                        );
-                      },
-                      child: FaIcon(
-                        FontAwesomeIcons.userMd,
-                        color: Color(0xCB000000),
-                        size: 25,
+                  Align(
+                    alignment: Alignment(0, 1),
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
+                      child: InkWell(
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UserWidget(),
+                            ),
+                          );
+                        },
+                        child: FaIcon(
+                          FontAwesomeIcons.userMd,
+                          color: Color(0xCB000000),
+                          size: 25,
+                        ),
                       ),
                     ),
                   ),
                   Align(
-                    alignment: Alignment(0, 0),
+                    alignment: Alignment(0, 1),
                     child: Text(
                       'Ambulant',
                       style: FlutterFlowTheme.title1.override(

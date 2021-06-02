@@ -16,19 +16,12 @@ class _ViewPatientWidgetState extends State<ViewPatientWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.primaryColor,
-        automaticallyImplyLeading: true,
-        actions: [],
-        centerTitle: true,
-        elevation: 4,
-      ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
           Container(
             width: double.infinity,
-            height: 140,
+            height: 160,
             decoration: BoxDecoration(
               color: FlutterFlowTheme.primaryColor,
               border: Border.all(
@@ -37,12 +30,14 @@ class _ViewPatientWidgetState extends State<ViewPatientWidget> {
             ),
             child: Row(
               mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
                   padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
                         padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
@@ -73,7 +68,7 @@ class _ViewPatientWidgetState extends State<ViewPatientWidget> {
                   padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
@@ -104,12 +99,15 @@ class _ViewPatientWidgetState extends State<ViewPatientWidget> {
                   ),
                 ),
                 Spacer(),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                  child: Icon(
-                    Icons.edit,
-                    color: Colors.black,
-                    size: 30,
+                Align(
+                  alignment: Alignment(0, 0.45),
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                    child: Icon(
+                      Icons.edit,
+                      color: Colors.black,
+                      size: 30,
+                    ),
                   ),
                 )
               ],

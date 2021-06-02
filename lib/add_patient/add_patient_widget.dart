@@ -1,6 +1,11 @@
+import '../auth/auth_util.dart';
+import '../backend/backend.dart';
+import '../flutter_flow/flutter_flow_drop_down_template.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/flutter_flow_util.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddPatientWidget extends StatefulWidget {
@@ -11,17 +16,19 @@ class AddPatientWidget extends StatefulWidget {
 }
 
 class _AddPatientWidgetState extends State<AddPatientWidget> {
+  String whereInputValue;
+  TextEditingController ippInputController;
   TextEditingController textController1;
   TextEditingController textController2;
-  TextEditingController textController3;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    ippInputController = TextEditingController();
     textController1 = TextEditingController();
     textController2 = TextEditingController();
-    textController3 = TextEditingController();
+    whereInputValue = 'Ambulant';
   }
 
   @override
@@ -33,94 +40,73 @@ class _AddPatientWidgetState extends State<AddPatientWidget> {
         children: [
           Container(
             width: double.infinity,
-            height: 140,
+            height: MediaQuery.of(context).size.height * 0.2,
             decoration: BoxDecoration(
               color: FlutterFlowTheme.primaryColor,
               border: Border.all(
                 color: Color(0xFFDBE2E7),
               ),
             ),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
+            child: Stack(
               children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
-                        child: Container(
-                          width: 75,
-                          height: 75,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.tertiaryColor,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Icon(
-                            Icons.person,
-                            color: Color(0xFFE388E3),
-                            size: 50,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'Age',
-                        style: FlutterFlowTheme.bodyText1.override(
-                          fontFamily: 'Lato',
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 1, 0, 0),
-                        child: Text(
-                          'Surname',
+                Align(
+                  alignment: Alignment(-0.6, 0),
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(8, 40, 8, 8),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Nouveau patient',
                           style: FlutterFlowTheme.title1.override(
                             fontFamily: 'Playfair Display',
                           ),
-                        ),
-                      ),
-                      Text(
-                        'Name',
-                        style: FlutterFlowTheme.title2.override(
-                          fontFamily: 'Playfair Display',
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
-                        child: Text(
-                          '123456',
-                          style: FlutterFlowTheme.bodyText1.override(
-                            fontFamily: 'Lato',
-                          ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-                Spacer(),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                  child: Icon(
-                    Icons.edit,
-                    color: Colors.black,
-                    size: 30,
+                Align(
+                  alignment: Alignment(0.7, 0.25),
+                  child: InkWell(
+                    onTap: () async {
+                      final pSurname = textController1.text;
+                      final pName = textController2.text;
+                      final pIpp = ippInputController.text;
+                      final pWhere = whereInputValue;
+                      final pAddDate = getCurrentTimestamp;
+
+                      final patientRecordData = createPatientRecordData(
+                        pSurname: pSurname,
+                        pName: pName,
+                        pIpp: pIpp,
+                        pWhere: pWhere,
+                        pAddDate: pAddDate,
+                      );
+
+                      await PatientRecord.collection
+                          .doc()
+                          .set(patientRecordData);
+                      Navigator.pop(context);
+                    },
+                    child: FaIcon(
+                      FontAwesomeIcons.check,
+                      color: Colors.black,
+                      size: 30,
+                    ),
                   ),
                 )
               ],
             ),
           ),
-          Expanded(
+          Container(
+            width: double.infinity,
+            height: MediaQuery.of(context).size.height * 1,
+            decoration: BoxDecoration(
+              color: Color(0xFFEEEEEE),
+            ),
             child: Padding(
               padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
               child: ListView(
@@ -140,7 +126,7 @@ class _AddPatientWidgetState extends State<AddPatientWidget> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Text(
-                                '',
+                                'Données personelles',
                                 style: FlutterFlowTheme.bodyText1.override(
                                   fontFamily: 'Montserrat',
                                   color: Color(0xFF0D1724),
@@ -157,8 +143,9 @@ class _AddPatientWidgetState extends State<AddPatientWidget> {
                             children: [
                               Expanded(
                                 child: Container(
-                                  width: 330,
-                                  height: 60,
+                                  width: double.infinity,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.05,
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(8),
@@ -172,7 +159,7 @@ class _AddPatientWidgetState extends State<AddPatientWidget> {
                                       controller: textController1,
                                       obscureText: false,
                                       decoration: InputDecoration(
-                                        labelText: 'Field 1',
+                                        labelText: 'Nom',
                                         labelStyle:
                                             FlutterFlowTheme.bodyText2.override(
                                           fontFamily: 'Montserrat',
@@ -220,8 +207,9 @@ class _AddPatientWidgetState extends State<AddPatientWidget> {
                             children: [
                               Expanded(
                                 child: Container(
-                                  width: 330,
-                                  height: 60,
+                                  width: double.infinity,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.05,
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(8),
@@ -235,7 +223,7 @@ class _AddPatientWidgetState extends State<AddPatientWidget> {
                                       controller: textController2,
                                       obscureText: false,
                                       decoration: InputDecoration(
-                                        labelText: 'Field 2',
+                                        labelText: 'Prénom',
                                         labelStyle:
                                             FlutterFlowTheme.bodyText2.override(
                                           fontFamily: 'Montserrat',
@@ -283,8 +271,9 @@ class _AddPatientWidgetState extends State<AddPatientWidget> {
                             children: [
                               Expanded(
                                 child: Container(
-                                  width: 330,
-                                  height: 60,
+                                  width: double.infinity,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.05,
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(8),
@@ -295,10 +284,10 @@ class _AddPatientWidgetState extends State<AddPatientWidget> {
                                   child: Padding(
                                     padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
                                     child: TextFormField(
-                                      controller: textController3,
+                                      controller: ippInputController,
                                       obscureText: false,
                                       decoration: InputDecoration(
-                                        labelText: 'Field 3',
+                                        labelText: 'IPP',
                                         labelStyle:
                                             FlutterFlowTheme.bodyText2.override(
                                           fontFamily: 'Montserrat',
@@ -338,37 +327,29 @@ class _AddPatientWidgetState extends State<AddPatientWidget> {
                               )
                             ],
                           ),
-                        ),
-                        Align(
-                          alignment: Alignment(0.95, 0),
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
-                            child: FFButtonWidget(
-                              onPressed: () {
-                                print('Button pressed ...');
-                              },
-                              text: 'Continue',
-                              options: FFButtonOptions(
-                                width: 140,
-                                height: 60,
-                                color: FlutterFlowTheme.primaryColor,
-                                textStyle: FlutterFlowTheme.subtitle2.override(
-                                  fontFamily: 'Montserrat',
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                elevation: 2,
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 2,
-                                ),
-                                borderRadius: 8,
-                              ),
-                            ),
-                          ),
                         )
                       ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                    child: FlutterFlowDropDown(
+                      options: ['Ambulant', 'U13 - Neurologie', 'U15 - Stroke'],
+                      onChanged: (value) {
+                        setState(() => whereInputValue = value);
+                      },
+                      width: double.infinity,
+                      height: MediaQuery.of(context).size.height * 0.05,
+                      textStyle: FlutterFlowTheme.bodyText1.override(
+                        fontFamily: 'Lato',
+                        color: Colors.black,
+                      ),
+                      fillColor: Colors.white,
+                      elevation: 2,
+                      borderColor: Colors.transparent,
+                      borderWidth: 0,
+                      borderRadius: 5,
+                      margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
                     ),
                   )
                 ],
